@@ -18,24 +18,20 @@ module "db" {
 
   vpc_security_group_ids = [local.mysql_sg_id]
   skip_final_snapshot  = true
-
+4
   tags = merge(
     var.common_tags,
     var.rds_tags
   )
 
   # DB subnet group
-  create_db_subnet_group = true
-  subnet_ids             = ["subnet-12345678", "subnet-87654321"]
-
+  db_subnet_group_name = local.database_subnet_group_name
+  
   # DB parameter group
-  family = "mysql5.7"
+  family = "mysql8.0"
 
   # DB option group
-  major_engine_version = "5.7"
-
-  # Database Deletion Protection
-  deletion_protection = true
+  major_engine_version = "8.0"
 
   parameters = [
     {
@@ -65,3 +61,18 @@ module "db" {
     },
   ]
 }
+
+module "records" {
+  source  = "terraform-aws-modules/route53/aws//modules/records"
+  zone_name = var.zone_name
+  records = [
+    {
+      name    = "mysql-${var.environment}" #mysql-dev.veeraprakash.online
+      type    = "CNAME"
+      ttl     = 1
+      records = [
+        module.db.db_instances_address]
+      allow_overwrite = true
+  ]
+        }
+    }
