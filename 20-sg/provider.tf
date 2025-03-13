@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket          = "vrapracash-1"
-    key             = "workspaces-sg"
+    key             = "workspaces-sg-dev"
     region          = "us-east-1"
     dynamodb_table  = "vrapracash-1-table" 
   }

@@ -1,5 +1,5 @@
 module "mysql_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/vrapracash/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     sg_name = "mysql"
@@ -9,7 +9,7 @@ module "mysql_sg" {
 }
 
 module "backend_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/vrapracash/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     sg_name = "backend"
@@ -19,7 +19,7 @@ module "backend_sg" {
 }
 
 module "frontend_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/vrapracash/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     sg_name = "frontend"
@@ -29,7 +29,7 @@ module "frontend_sg" {
 }
 
 module "bastion_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/vrapracash/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     sg_name = "bastion"
@@ -39,7 +39,7 @@ module "bastion_sg" {
 }
 
 module "ansible_sg" {
-    source = "../../terraform-aws-security-group"
+    source = "git::https://github.com/vrapracash/terraform-aws-security-group.git?ref=main"
     project_name = var.project_name
     environment = var.environment
     sg_name = "ansible"
